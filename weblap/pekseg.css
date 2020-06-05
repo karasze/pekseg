@@ -1,0 +1,67 @@
+.active
+{
+  background-color: #F0E8DD;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #BF9872;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #241F19;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #241F19;
+  color: #BF9872;
+}
+
+.center
+{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.keret
+{
+  height: 700px;
+  margin: 3em;
+  border: none;
+  width: 95%;
+}
+
+body
+{
+  font-family: 'Righteous', cursive;
+  background-color: #F0E8DD;
+}
+
+h1, h3
+{
+  color: #724732;
+}
+
+h3
+{
+  text-align: justify;
+}
+
+footer
+{
+  background-color: #BF9872;
+  height: 3em;
+}
+
