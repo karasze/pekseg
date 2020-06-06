@@ -7,18 +7,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="pekseg.css">
   <script src="pekseg.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
 
-  <ul class="nav navbar-nav">
-    <li id="m1" class="active"><a href="kezdo.html" target="iframe_a" onclick="">Kezdőoldal</a></li>
-    <li id="m2"><a href="termek.html" target="iframe_a">Termékek</a></li>
-    <li id="m3"><a href="uzlet.html" target="iframe_a">Üzletek</a></li>
-  </ul>
+  <div>
+    <ul class="nav navbar-nav">
+      <li id="m1" class="active"><a href="kezdo.html" target="iframe_a" onclick="katt(1)">Kezdőoldal</a></li>
+      <li id="m2" class="semmi"><a href="termek.html" target="iframe_a"  onclick="katt(2)">Termékek</a></li>
+      <li id="m3" class="semmi"><a href="uzlet.html" target="iframe_a"  onclick="katt(3)">Üzletek</a></li>
+    </ul>
+  </div>
 
-  <iframe class="keret center" src="kezdo.html" name="iframe_a"></iframe>
+  <div class="center">
+    <iframe class="keret" src="kezdo.html" name="iframe_a"></iframe>
+  </div>
 
-<footer class="container-fluid">
-  <p>Köszönjük a látogatást!</p>
-</footer>
+  <div>
+    <footer class="container-fluid">
+      <p>Köszönjük a látogatást!</p>
+    </footer>
+  </div>
+
+</body>
