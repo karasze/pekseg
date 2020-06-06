@@ -1,6 +1,6 @@
 .active
 {
-  background-color: #F0E8DD;
+  background-color: #f0e8dd;
 }
 
 ul
@@ -50,6 +50,7 @@ li a:hover
 body
 {
   font-family: 'Righteous', cursive;
+  background-image: url("hatter.png");
   background-color: #F0E8DD;
 }
 
