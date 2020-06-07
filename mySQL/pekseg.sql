@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Jún 06. 23:06
+-- Létrehozás ideje: 2020. Jún 07. 23:22
 -- Kiszolgáló verziója: 10.4.11-MariaDB
 -- PHP verzió: 7.4.5
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bolt` (
-  `bolt_id` smallint(3) DEFAULT NULL,
+  `bolt_id` smallint(3) NOT NULL,
   `bolt_neve` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `IRSZ` smallint(4) DEFAULT NULL,
   `B_UHSZ` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
@@ -85,7 +85,7 @@ INSERT INTO `hol_dolgozik` (`dolg_id`, `bolt_id`) VALUES
 --
 
 CREATE TABLE `iranyitoszam` (
-  `iranyitoszam` smallint(4) DEFAULT NULL,
+  `iranyitoszam` smallint(4) NOT NULL,
   `helyiseg` tinytext COLLATE utf8_hungarian_ci DEFAULT NULL,
   `megye` tinytext COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
@@ -3088,7 +3088,7 @@ INSERT INTO `iranyitoszam` (`iranyitoszam`, `helyiseg`, `megye`) VALUES
 --
 
 CREATE TABLE `jarmuvek` (
-  `rendszam` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `rendszam` varchar(7) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `tipus` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `kategoria` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -3098,11 +3098,11 @@ CREATE TABLE `jarmuvek` (
 --
 
 INSERT INTO `jarmuvek` (`rendszam`, `tipus`, `kategoria`) VALUES
-('NSR-233', 'Renault', 'személy'),
-('ITP-799', 'Opel', 'személy'),
-('RDZ-101', 'BMW', 'személy'),
+('ABC-101', 'Isuzu', 'teher'),
 ('DSL-344', 'Suzuki', 'személy'),
-('ABC-101', 'Isuzu', 'teher');
+('ITP-799', 'Opel', 'személy'),
+('NSR-233', 'Renault', 'személy'),
+('RDZ-101', 'BMW', 'személy');
 
 -- --------------------------------------------------------
 
@@ -3111,7 +3111,7 @@ INSERT INTO `jarmuvek` (`rendszam`, `tipus`, `kategoria`) VALUES
 --
 
 CREATE TABLE `ki_vezeti` (
-  `rendszam` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `rendszam` varchar(7) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `dolg_id` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3138,14 +3138,14 @@ INSERT INTO `ki_vezeti` (`rendszam`, `dolg_id`) VALUES
 --
 
 CREATE TABLE `rendeles` (
-  `rendeles_szam` mediumint(9) DEFAULT NULL,
+  `rendeles_szam` mediumint(9) NOT NULL,
   `rendeles_datum` date DEFAULT NULL,
   `szallitas_datum` date DEFAULT NULL,
   `idopont` time DEFAULT NULL,
   `partner_tipus` tinyint(4) DEFAULT NULL,
   `hova_id` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `hova_IRSZ` smallint(4) DEFAULT NULL,
-  `rendszam` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `rendszam` varchar(7) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `dolg_id` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3170,7 +3170,7 @@ INSERT INTO `rendeles` (`rendeles_szam`, `rendeles_datum`, `szallitas_datum`, `i
 --
 
 CREATE TABLE `szemelyzet` (
-  `dolg_id` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `dolg_id` varchar(4) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `vezetek_nev` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `kereszt_nev` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `IRSZ` smallint(4) DEFAULT NULL,
@@ -3204,13 +3204,13 @@ INSERT INTO `szemelyzet` (`dolg_id`, `vezetek_nev`, `kereszt_nev`, `IRSZ`, `SZ_U
 --
 
 CREATE TABLE `termek` (
-  `termek_id` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `termek_id` int(4) NOT NULL,
   `neve` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
   `gluten_M` tinyint(1) DEFAULT NULL,
   `laktoz_M` tinyint(1) DEFAULT NULL,
   `cukor_M` tinyint(1) DEFAULT NULL,
-  `ar` smallint(3) DEFAULT NULL,
-  `tomeg` smallint(4) DEFAULT NULL
+  `ar` smallint(6) DEFAULT NULL,
+  `tomeg` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3218,15 +3218,15 @@ CREATE TABLE `termek` (
 --
 
 INSERT INTO `termek` (`termek_id`, `neve`, `gluten_M`, `laktoz_M`, `cukor_M`, `ar`, `tomeg`) VALUES
-('cs-001', 'sonkás kifli', 0, 0, 1, 250, 50),
-('cs-002', 'ízes bukta', 0, 0, 0, 99, 80),
-('cs-003', 'óriás perec', 0, 0, 1, 79, 100),
-('cs-004', 'sajtos rúd', 1, 0, 0, 149, 80),
-('f-001', 'darázsfészek', 0, 0, 0, 268, 150),
-('f-002', 'almás kocka', 0, 0, 0, 200, 100),
-('f-003', 'alföldi parasztcipó', 0, 1, 1, 350, 1000),
-('f-004', 'császárzsemle', 0, 1, 1, 25, 50),
-('f-005', 'epres bajor', 0, 1, 0, 79, 80);
+(1001, 'sonkás kifli', 0, 0, 1, 250, 50),
+(1002, 'ízes bukta', 0, 0, 0, 99, 80),
+(1003, 'óriás perec', 0, 0, 1, 79, 100),
+(1004, 'sajtos rúd', 1, 0, 0, 149, 80),
+(1005, 'darázsfészek', 0, 0, 0, 268, 150),
+(1006, 'almás kocka', 0, 0, 0, 200, 100),
+(1007, 'alföldi parasztcipó', 0, 1, 1, 350, 1000),
+(1008, 'császárzsemle', 0, 1, 1, 25, 50),
+(1009, 'epres bajor', 0, 1, 0, 79, 80);
 
 -- --------------------------------------------------------
 
@@ -3258,6 +3258,46 @@ INSERT INTO `termek_lista` (`rendeles_szam`, `termek_id`, `darab`) VALUES
 (202350, 1007, 90),
 (202351, 1007, 80),
 (202352, 1007, 70);
+
+--
+-- Indexek a kiírt táblákhoz
+--
+
+--
+-- A tábla indexei `bolt`
+--
+ALTER TABLE `bolt`
+  ADD PRIMARY KEY (`bolt_id`);
+
+--
+-- A tábla indexei `iranyitoszam`
+--
+ALTER TABLE `iranyitoszam`
+  ADD PRIMARY KEY (`iranyitoszam`);
+
+--
+-- A tábla indexei `jarmuvek`
+--
+ALTER TABLE `jarmuvek`
+  ADD PRIMARY KEY (`rendszam`);
+
+--
+-- A tábla indexei `rendeles`
+--
+ALTER TABLE `rendeles`
+  ADD PRIMARY KEY (`rendeles_szam`);
+
+--
+-- A tábla indexei `szemelyzet`
+--
+ALTER TABLE `szemelyzet`
+  ADD PRIMARY KEY (`dolg_id`);
+
+--
+-- A tábla indexei `termek`
+--
+ALTER TABLE `termek`
+  ADD PRIMARY KEY (`termek_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
